@@ -208,4 +208,29 @@ class Check {
         return preg_replace("/[^0-9]/", "", $str);
     }
 
+    public static function DomingosMes($Mes) {
+        $ano = date("Y");
+
+        $data = $ano . '-' . $Mes. '-01';
+
+        $inicio = new DateTime($data);
+        $fim = new DateTime($inicio->format('Y-m-t'));
+        $dias = $inicio->diff($fim, true)->days;
+
+        return intval($dias / 7) + ($inicio->format('N') + $dias % 7 >= 7);
+    }
+
+    
+    public static function DomingosPeriodo($Inicio, $Fim) {
+        $ano = date("Y");
+
+        //$data = $ano . '-' . $Mes. '-01';
+
+        $inicio = new DateTime($Inicio);
+        $fim = new DateTime($Fim); //$inicio->format('Y-m-t'));
+        $dias = $inicio->diff($fim, true)->days;
+
+        return intval($dias / 7) + ($inicio->format('N') + $dias % 7 >= 7);
+    }
+    
 }

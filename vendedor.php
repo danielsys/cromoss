@@ -303,8 +303,8 @@
     $rowMeta = $Meta->fetchAll();
    
     if (count($rowMeta) > 0) {
-    
-        $MetaDiaria = $rowMeta[0]['MetaMes'] / ($ultimo_dia-4);
+        
+        $MetaDiaria = $rowMeta[0]['MetaMes'] / ($ultimo_dia-Check::DomingosMes(date("m")));
         $MetaMensal = $rowMeta[0]['MetaMes'];
 
         $MetaDiariaPorcCalc = ($RankDia > 0 ? $rowRank[$RankKey]['Valor_Vendas'] : 0);
@@ -419,7 +419,7 @@
     
                 <div>
                     <div class="mt-3">
-                        <h5>Meta Diária: <span class="badge badge-<?php echo $MetaCor; ?>">R$ <?php echo Check::Moeda($MetaDiaria); ?></span> <?php if ($MetaDiariaPorc >= 100) { echo '<img align="absmiddle" src="' . HOME . '/img/icon/trophy.png" />'; } ?> &nbsp; &nbsp; <span style="font-size:14px;">Meta até hoje</span> <span class="badge badge-primary">R$ <?php echo Check::Moeda($MetaDiaria * date('d')); ?></span></h5>
+                        <h5>Meta Diária: <span class="badge badge-<?php echo $MetaCor; ?>">R$ <?php echo Check::Moeda($MetaDiaria); ?></span> <?php if ($MetaDiariaPorc >= 100) { echo '<img align="absmiddle" src="' . HOME . '/img/icon/trophy.png" />'; } ?> &nbsp; &nbsp; <span style="font-size:14px;">Meta até hoje</span> <span class="badge badge-primary">R$ <?php echo Check::Moeda($MetaDiaria * (date('d') - (Check::DomingosPeriodo(date("Y-m") . "-01", date("Y-m-d"))))); ?></span></h5>
                         <div class="progress" style="background:#ccc;">
                           <div class="progress-bar progress-bar-striped progress-bar-animated bg-<?php echo $MetaCor; ?>" role="progressbar" style="width: <?php echo $MetaDiariaPorc; ?>%" aria-valuenow="<?php echo $MetaDiariaPorc; ?>" aria-valuemin="0" aria-valuemax="100"><?php echo $MetaDiariaPorc; ?>%</div>
                         </div>
