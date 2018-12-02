@@ -35,6 +35,8 @@
     $data1 = date("Y-m-d") . 'T00:00:00.000';
     $data2 = date("Y-m-d", strtotime("+1 day")) . 'T00:00:00.000';
     
+    echo "<h1>" . $data1 . '/' . $data2;
+    
     
     $RankSQL = ("
                             SELECT 

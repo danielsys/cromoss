@@ -1,5 +1,8 @@
 <?php
 
+//Timezone
+date_default_timezone_set("America/Sao_Paulo");
+
 // CONFIGURAÇÃO SQL SERVER
 $pdo = new PDO("sqlsrv:Server=192.168.3.250;Database=S9_Real;", "sa", "@sh@vis!");
 
