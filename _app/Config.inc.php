@@ -27,7 +27,13 @@ define('SITENAME', 'Univoto');
 define('SITEDESC', 'Descricao');
 
 // DEFINE A BASE DO SITE ####################
-define('HOME', 'http://192.168.2.41/cromoss');
+if ($_SERVER['SERVER_NAME'] == "192.168.3.251") {
+    define('HOME', 'http://192.168.3.251:8080/cromoss');
+} else {
+    define('HOME', 'http://186.228.20.130:8080/cromoss');
+}
+
+//define('HOME', 'http://192.168.2.41/cromoss');
 define('THEME', 'candidato');
 
 define('INCLUDE_PATH', HOME . '/' . 'theme' . '/' . THEME);
