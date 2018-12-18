@@ -106,8 +106,11 @@ if (isset($_SESSION['cliente'])) {
                     }
                     ?>
                     <br>Data: <?php echo Check::DataDiaMes($rowMesa['data_encerramento']); ?>
+                    <br>Vendedor: <?php echo $rowMesa['vendedor']; ?>
                 </p>    
-                <p><a class="btn btn-danger" href="mesa.php?idmesa=<?php echo $rowMesa['idmesa']; ?>" role="button">Ver Produtos</a></p>
+                <p>
+                    <a class="btn btn-danger" href="mesa.php?idmesa=<?php echo $rowMesa['idmesa']; ?>" role="button">Ver Produtos</a>
+                </p>
             </div><!-- /.col-lg-4 -->
 
 

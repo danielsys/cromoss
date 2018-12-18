@@ -8,7 +8,6 @@
 
     if ($idmesa=='') { header("Location:index.php"); }
     
-    
     //Deleta Produto
     if ($action == 'deleta_produto') {
         $idmesa_produtos = filter_input(INPUT_GET, 'idmesa_produtos');
@@ -19,6 +18,26 @@
         $Atualiza->ExeUpdate("mesa_produtos", $Dados, "WHERE idmesa_produtos = :idmesa_produtos", "idmesa_produtos={$idmesa_produtos}");
         
         $aviso = "Produto enviado para a lixeira";
+    }
+    
+    if ($action == 'vendido') { 
+        $idmesa_produtos = filter_input(INPUT_GET, 'idmesa_produtos');
+        $Dados['vendido'] = 1;
+     
+        $Atualiza = new Update();
+        $Atualiza->ExeUpdate("mesa_produtos", $Dados, "WHERE idmesa_produtos = :idmesa_produtos", "idmesa_produtos={$idmesa_produtos}");
+        
+        $aviso = "Produto selecionado marcado como vendido";
+    }
+    
+    if ($action == "voltar_produto") {
+        $idmesa_produtos = filter_input(INPUT_GET, 'idmesa_produtos');
+        $Dados['vendido'] = 0;
+     
+        $Atualiza = new Update();
+        $Atualiza->ExeUpdate("mesa_produtos", $Dados, "WHERE idmesa_produtos = :idmesa_produtos", "idmesa_produtos={$idmesa_produtos}");
+        
+        $aviso = "Produto selecionado voltado para vendas";
     }
 
 
@@ -131,6 +150,18 @@
             location.href="mesa.php?idmesa=" + mesa + "&action=deleta_kit&idmesa_produtos_kit=" + idproduto;
         }
     }
+    
+    function VoltarProduto(idproduto) {
+        if (confirm("Você deseja realmente voltar este produto para a venda?")) {
+            location.href="mesa.php?idmesa=" + mesa + "&action=voltar_produto&idmesa_produtos=" + idproduto;
+        }
+    }
+    
+    function Vendido(idproduto) {
+        if (confirm("Marcar este produto como vendido?")) {
+            location.href="mesa.php?idmesa=" + mesa + "&action=vendido&idmesa_produtos=" + idproduto;
+        }
+    }    
 </script>
 
 <div class="shadow-lg" style="background:#f4f4f4;">
@@ -422,9 +453,12 @@
 
                     <b>R$ <?php echo Check::Moeda($total); ?></b>
                 </div>
-                <div class="col-sm-3 text-right">
+                <div class="col-sm-4 text-right">
                     <button type="button" onclick="AdicionaKit(<?php echo $rowProdutos['idmesa_produtos']; ?>);" class="btn btn-dark btn-sm">Adicionar Kit</button>
                     <button type="button" onclick="RemoveProduto(<?php echo $rowProdutos['idmesa_produtos']; ?>);" class="btn btn-danger btn-sm">Remover</button>
+                    <?php if ($rowProdutos['vendido'] == '0') { ?><button type="button" onclick="Vendido(<?php echo $rowProdutos['idmesa_produtos']; ?>);" class="btn btn-success btn-sm">Vendido</button><?php } else { ?>
+                    <button type="button" onclick="VoltarProduto(<?php echo $rowProdutos['idmesa_produtos']; ?>);" class="btn btn-primary btn-sm">Voltar</button>
+                    <?php } ?>
                 </div>
             </div>
             <?php

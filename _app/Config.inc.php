@@ -20,16 +20,18 @@ define('MAILPORT', ''); //porta
 define('MAILHOST', '');
 
 //DOMINIO
-define('DOMINIO', 'univoto.com.br');
+define('DOMINIO', 'x.com.br');
 
 // DEFINE IDENTIDADE DO SITE ################
-define('SITENAME', 'Univoto');
-define('SITEDESC', 'Descricao');
+define('SITENAME', 'X');
+define('SITEDESC', 'x');
 
 // DEFINE A BASE DO SITE ####################
-if ($_SERVER['SERVER_NAME'] == "192.168.3.251") {
+if ($_SERVER['SERVER_NAME'] == "192.168.2.41") {
+    define('HOME', 'http://192.168.2.41/cromoss');
+} else if ($_SERVER['SERVER_NAME'] == "192.168.3.251") {
     define('HOME', 'http://192.168.3.251:8080/cromoss');
-} else {
+} else { 
     define('HOME', 'http://186.228.20.130:8080/cromoss');
 }
 

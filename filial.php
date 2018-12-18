@@ -17,7 +17,7 @@ if (isset($filial) && isset($filial['filial']) && $filial['filial'] != "") {
     
     $expira = time() + 60 * 60 * 24 * 120;
     setcookie("loja", serialize($filial), $expira);
-    echo "Set";
+    header("Location:index.php");
 }
 
 if (isset($_COOKIE['loja'])) {
